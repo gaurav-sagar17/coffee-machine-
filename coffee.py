@@ -4,32 +4,37 @@ import time
 water = 200
 milk = 200
 coffee = 100
-pudia = 200 
+bournvita_pouch = 200
 collection = 0
 
 class espresso :
-                    water = 50
-                    milk = 0
-                    coffee = 18
-                    price = 1.50
+    name = "espresso"
+    water = 50
+    milk = 0
+    coffee = 18
+    price = 1.50
                     
 class latte :
-                    water = 200
-                    milk = 150
-                    coffee = 24
-                    price = 2.50
+    name = "latte"
+    water = 200
+    milk = 150
+    coffee = 24
+    price = 2.50
                     
 class cappuccino :
-                    water = 250
-                    milk = 100
-                    coffee = 24
-                    price = 3
+    name = "cappuccino"
+    water = 250
+    milk = 100
+    coffee = 24
+    price = 3
                     
 class bournvita :
-                    milk = 50 
-                    pudia = 100
-                    sugar = 10
-                    price = 5
+    name = "bournvita"
+    milk = 50
+    water = 0
+    bournvita_pouch = 100
+    sugar = 10
+    price = 5
 def coin_collector() :
                     a = int(input("Any  Penny's   : "))
                     b = int(input("Any  Nickel's  : "))
@@ -52,16 +57,19 @@ def resource_checker(classname) :
                                         return False
                     
 def process(classname) :
-                    global water , coffee , milk , collection
+                    global water , coffee , milk , collection,bournvita_pouch
                     
                     print("PROCESSING YOUR COFFEE!!!")
                     time.sleep(10)
                     print("HERE'S YOUR COFFEE , HAVE A NICE DAY")
-                                                                                                    
-                    water -= classname.water 
+
+                    if classname.name == "bournvita" :
+                        pass
+                    else :
+                        water -= classname.water
                     milk -= classname.milk
-                    if classname == "bournvita" :
-                                        pudia -= classname.pudia 
+                    if classname.name == "bournvita" :
+                                        bournvita_pouch -= classname.bournvita_pouch
                     else :
                                         coffee -= classname.coffee 
                     collection += classname.price
@@ -94,10 +102,10 @@ def start():
 ~ ESPRESSO
 ~ LATTE
 ~ CAPPUCCINO
-` BOURNVITA
+~ BOURNVITA
                                         
 what would you like to order sir ? \n''')
-                    global water , coffee , milk , collection
+                    global water , coffee , milk , collection,bournvita_pouch
                     if opt.lower() == "espresso" :
                                         
                                         flavour(espresso)
@@ -112,9 +120,10 @@ what would you like to order sir ? \n''')
                     
                     elif opt.lower() == "report" :
                                         print(f'''..........AVAILABLE RESOURCES................
-                                                      WATER      : {water} ml
-                                                      MILK       : {milk} ml
-                                                      COFFEE     : {coffee} g
+                                                      WATER           : {water} ml
+                                                      MILK            : {milk} ml
+                                                      COFFEE          : {coffee} g
+                                                      BOURNVITA POUCH : {bournvita_pouch} 
                                                       COLLECTION : {collection}$
                                                       
                      
@@ -122,7 +131,7 @@ what would you like to order sir ? \n''')
                                                       
                                                                                                 ''')
                     elif opt.lower() == "bournvita" :
-                                        if water>=bournvita.water and pudia>=bournvita.pudia and milk>=bournvita.milk :
+                                        if  bournvita_pouch>=bournvita.bournvita_pouch and milk>=bournvita.milk :
                                                             print(f"SURE SIR , PLEASE PAY : {bournvita.price} [only coins accepted] : ")
                                                             a,b,c,d = coin_collector()
                                                             if ( a+b+c+d ) >= bournvita.price  :
